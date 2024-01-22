@@ -6,11 +6,3 @@ public class GridElement : MonoBehaviour
 {
     public virtual void Initialize(){}
 }
-
-public enum JewelType
-{
-    Ruby,
-    Emerald,
-    Sapphire,
-    Bismuth,
-}
