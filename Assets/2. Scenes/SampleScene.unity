@@ -123,6 +123,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &312308187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 312308189}
+  - component: {fileID: 312308188}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &312308188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312308187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72429d32db672ba468d3f4e1764b030b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 1992873348}
+  showPopulating: 1
+--- !u!4 &312308189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312308187}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.3104901, y: 0.11397171, z: 0.4789033}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +230,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.8240604
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -244,7 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596bfdfb00bc81a40869589c68a1cc7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridElementPrefab: {fileID: 593382478035497571, guid: 02d7ee32660043b4f946a9ac9c5295ea, type: 3}
+  gridElementPrefab: {fileID: 3782698640593031488, guid: 02d7ee32660043b4f946a9ac9c5295ea, type: 3}
   gridSize: {x: 10, y: 10}
   gridElementMargin: 1
 --- !u!4 &1992873349
@@ -268,3 +314,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 1992873349}
+  - {fileID: 312308189}

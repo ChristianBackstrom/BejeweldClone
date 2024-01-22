@@ -13,20 +13,15 @@ public class Grid : MonoBehaviour
     
     public Dictionary<Vector2Int, GridElement> gridElements;
 
-    private void Start()
-    {
-        Populate(gridSize);
-    }
-
-    protected void Populate(Vector2Int size)
+    public void Populate()
     {
         gridElements = new Dictionary<Vector2Int, GridElement>();
 
         if (!gridElementPrefab) Application.Quit();
 
-        for (int x = -size.x / 2; x < size.x / 2; x++)
+        for (int x = -gridSize.x / 2; x < gridSize.x / 2; x++)
         {
-            for (int y = -size.y / 2; y < size.y / 2; y++)
+            for (int y = -gridSize.y / 2; y < gridSize.y / 2; y++)
             {
                 Vector2Int coordinates = new Vector2Int(x, y);
 
@@ -37,6 +32,18 @@ public class Grid : MonoBehaviour
                 gridElements.Add(coordinates, gridElement);
             }
         }
+    }
+
+    public void DePopulate()
+    {
+        if (gridElements == null) return;
+        
+        foreach (var element in gridElements)
+        {
+            Destroy(element.Value);
+        }
+        
+        gridElements.Clear();
     }
 
     private Vector2 GeneratePositionFromCoordinates(Vector2Int coordinates)
