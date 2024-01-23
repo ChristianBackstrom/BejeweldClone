@@ -71,5 +71,15 @@ public class Grid : MonoBehaviour
                 Gizmos.DrawWireCube(position, new Vector3(gridElementMargin, gridElementMargin));
             }
         }
+        
+        if (gridElements == null) return;
+        
+        foreach (var gridElement in gridElements)
+        {
+            Gem gem = (Gem)gridElement.Value;
+            Gizmos.color = gem.isMatched ? Color.red : Color.white;
+            Gizmos.DrawSphere(gem.transform.position, .2f);
+            Handles.Label(gem.transform.position + new Vector3(-.5f, .5f), gridElement.Key.ToString());
+        }
     }
 }

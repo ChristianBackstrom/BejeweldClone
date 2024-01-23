@@ -47,7 +47,10 @@ public class BejeweldGameManager : MonoBehaviour
     {
         grid.Populate();
     }
-
+    
+    /// <summary>
+    /// When this starts it generates a grid every 1/2 second to show the populating of the grid.
+    /// </summary>
     private async void ShowOf()
     {
         while(showPopulating && Application.isPlaying)
@@ -62,45 +65,45 @@ public class BejeweldGameManager : MonoBehaviour
         new Vector2Int(1,0),
         new Vector2Int(0,1),
     };
+    
+    /// <summary>
+    /// Checks if the sent gem has any linear connections with the same gem type and puts them into a list.
+    /// </summary>
+    /// <param name="sender">Checks connections from this gem</param>
     private void CheckConnectionsWith(Gem sender)
     {
-        for (int i = 0; i < Directions.Length; i++)
+        List<Gem> allMatchedGems = new List<Gem>(20);
+        
+        foreach (var direction in Directions)
         {
-            List<Gem> matchedGems = MatchedGemsInPlane(sender, Directions[i]);
-
+            List<Gem> matchedGems = new List<Gem> { sender };
+            matchedGems.AddRange(MatchedGemsInDirection(sender, direction));
+            matchedGems.AddRange(MatchedGemsInDirection(sender, -direction));
+            
             if (matchedGems.Count < 3) continue;
-
-            for (int j = 0; j < matchedGems.Count; j++)
-            {
-                if (matchedGems[j] == null) continue;
-                Destroy(matchedGems[j]);
-            }
+            
+            allMatchedGems.AddRange(matchedGems);
         }
-        
-        
+
+        foreach (var gem in allMatchedGems)
+        {
+            gem.isMatched = true;
+        }
     }
 
-    private List<Gem> MatchedGemsInPlane(Gem startGem, Vector2Int direction)
+    private List<Gem> MatchedGemsInDirection(Gem startGem, Vector2Int direction)
     {
         List<Gem> matchedGems = new List<Gem>();
-        matchedGems.Add(startGem);
-        
-        Gem nextGem = startGem;
-
-        for (int x = -1; x < 2; x += 2)
+        Gem nextGem;
+        if (GridElements.TryGetValue(startGem.coordinate + direction, out nextGem))
         {
-            do
+
+            if (nextGem.gemType == startGem.gemType)
             {
-                if (!GridElements.TryGetValue(nextGem.coordinate + (direction * x), out nextGem))
-                {
-                    nextGem = startGem;
-                    break;
-                }
-                
-                if (nextGem.gemType == startGem.gemType && !matchedGems.Contains(nextGem))
-                    matchedGems.Add(nextGem);
-                
-            } while (nextGem != null);
+                print($"Gem: {nextGem.name} : {nextGem.gemType.ToString()}");
+                matchedGems.Add(nextGem);   
+                matchedGems.AddRange(MatchedGemsInDirection(nextGem, direction));
+            }
         }
 
         return matchedGems;
