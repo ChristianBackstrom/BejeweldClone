@@ -49,8 +49,10 @@ MonoBehaviour:
   sprites:
   - {fileID: 1827549659, guid: 8000a33678f4b3f4a8514c4bd2a527f0, type: 3}
   - {fileID: -1088011521, guid: 8000a33678f4b3f4a8514c4bd2a527f0, type: 3}
-  - {fileID: 92810106, guid: 8000a33678f4b3f4a8514c4bd2a527f0, type: 3}
-  - {fileID: -1442057215, guid: 8000a33678f4b3f4a8514c4bd2a527f0, type: 3}
+  - {fileID: 1155345, guid: 8000a33678f4b3f4a8514c4bd2a527f0, type: 3}
+  - {fileID: 1235401432, guid: 8000a33678f4b3f4a8514c4bd2a527f0, type: 3}
+  - {fileID: -348581094, guid: 8000a33678f4b3f4a8514c4bd2a527f0, type: 3}
+  - {fileID: -500955152, guid: 8000a33678f4b3f4a8514c4bd2a527f0, type: 3}
 --- !u!212 &2976576383512537855
 SpriteRenderer:
   m_ObjectHideFlags: 0
