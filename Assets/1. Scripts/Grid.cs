@@ -13,6 +13,7 @@ public class Grid : MonoBehaviour
     
     public Dictionary<Vector2Int, GridElement> gridElements;
 
+    // Creates the gems and runs their initialization function
     public void Populate()
     {
         gridElements = new Dictionary<Vector2Int, GridElement>();
@@ -27,39 +28,31 @@ public class Grid : MonoBehaviour
 
                 Vector2 position = GeneratePositionFromCoordinates(coordinates);
                 GridElement gridElement = Instantiate(gridElementPrefab, position, Quaternion.identity);
+                gridElement.transform.parent = this.transform;
                 gridElement.Initialize();
                 
                 gridElements.Add(coordinates, gridElement);
             }
         }
     }
-
+    
+    // Destroys all gems on board and clears the dictionary
     public void DePopulate()
     {
-        if (gridElements == null) return;
+        if (gridElements == null) return; 
         
         foreach (var element in gridElements)
         {
-            Destroy(element.Value);
+            if (element.Value.gameObject != null)
+                Destroy(element.Value.gameObject);
         }
         
         gridElements.Clear();
     }
-
+    
+    // to give the gems their correct position in world with their corresponding coordinate in the grid
     private Vector2 GeneratePositionFromCoordinates(Vector2Int coordinates)
     {
         return (Vector2)coordinates * gridElementMargin;
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (gridElements == null) return;
-        
-        foreach (KeyValuePair<Vector2Int,GridElement> keyValuePair in gridElements)
-        {
-            GridElement gridElement = keyValuePair.Value;
-            
-            Handles.Label(gridElement.transform.position, keyValuePair.Key.ToString());
-        }
     }
 }
