@@ -51,28 +51,6 @@ public class Grid : MonoBehaviour
         gridElements.Clear();
     }
 
-    private static readonly Vector2Int[] NeighbourCoordinates =
-    {
-        new Vector2Int(1,0),
-        new Vector2Int(-1,0),
-        new Vector2Int(0,-1),
-        new Vector2Int(0,1),
-    };
-    public List<GridElement> GetNeighbours(Vector2Int coordinate)
-    {
-        List<GridElement> neighbours = new List<GridElement>(4);
-
-        foreach (Vector2Int neighbourCoordinate in NeighbourCoordinates)
-        {
-            Vector2Int coords = coordinate + neighbourCoordinate;
-            GridElement element;
-            if (!gridElements.TryGetValue(coords, out element)) continue;
-            
-            neighbours.Add(element);
-        }
-
-        return neighbours;
-    }
     
     // to give the gems their correct position in world with their corresponding coordinate in the grid
     public Vector2 GeneratePositionFromCoordinates(Vector2Int coordinates)

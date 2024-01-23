@@ -57,10 +57,53 @@ public class BejeweldGameManager : MonoBehaviour
             grid.DePopulate();
         }
     }
-
+    private static readonly Vector2Int[] Directions =
+    {
+        new Vector2Int(1,0),
+        new Vector2Int(0,1),
+    };
     private void CheckConnectionsWith(Gem sender)
     {
+        for (int i = 0; i < Directions.Length; i++)
+        {
+            List<Gem> matchedGems = MatchedGemsInPlane(sender, Directions[i]);
+
+            if (matchedGems.Count < 3) continue;
+
+            for (int j = 0; j < matchedGems.Count; j++)
+            {
+                if (matchedGems[j] == null) continue;
+                Destroy(matchedGems[j]);
+            }
+        }
         
+        
+    }
+
+    private List<Gem> MatchedGemsInPlane(Gem startGem, Vector2Int direction)
+    {
+        List<Gem> matchedGems = new List<Gem>();
+        matchedGems.Add(startGem);
+        
+        Gem nextGem = startGem;
+
+        for (int x = -1; x < 2; x += 2)
+        {
+            do
+            {
+                if (!GridElements.TryGetValue(nextGem.coordinate + (direction * x), out nextGem))
+                {
+                    nextGem = startGem;
+                    break;
+                }
+                
+                if (nextGem.gemType == startGem.gemType && !matchedGems.Contains(nextGem))
+                    matchedGems.Add(nextGem);
+                
+            } while (nextGem != null);
+        }
+
+        return matchedGems;
     }
 
     private Dictionary<Vector2Int, Gem> ParseToGem()
