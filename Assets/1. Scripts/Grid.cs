@@ -28,8 +28,9 @@ public class Grid : MonoBehaviour
 
                 Vector2 position = GeneratePositionFromCoordinates(coordinates);
                 GridElement gridElement = Instantiate(gridElementPrefab, position, Quaternion.identity);
-                gridElement.transform.parent = this.transform;
+                gridElement.coordinate = coordinates;
                 gridElement.Initialize();
+                gridElement.name = $"( {x} , {y} )";
                 
                 gridElements.Add(coordinates, gridElement);
             }
@@ -49,9 +50,32 @@ public class Grid : MonoBehaviour
         
         gridElements.Clear();
     }
+
+    private static readonly Vector2Int[] NeighbourCoordinates =
+    {
+        new Vector2Int(1,0),
+        new Vector2Int(-1,0),
+        new Vector2Int(0,-1),
+        new Vector2Int(0,1),
+    };
+    public List<GridElement> GetNeighbours(Vector2Int coordinate)
+    {
+        List<GridElement> neighbours = new List<GridElement>(4);
+
+        foreach (Vector2Int neighbourCoordinate in NeighbourCoordinates)
+        {
+            Vector2Int coords = coordinate + neighbourCoordinate;
+            GridElement element;
+            if (!gridElements.TryGetValue(coords, out element)) continue;
+            
+            neighbours.Add(element);
+        }
+
+        return neighbours;
+    }
     
     // to give the gems their correct position in world with their corresponding coordinate in the grid
-    private Vector2 GeneratePositionFromCoordinates(Vector2Int coordinates)
+    public Vector2 GeneratePositionFromCoordinates(Vector2Int coordinates)
     {
         return (Vector2)coordinates * gridElementMargin;
     }
