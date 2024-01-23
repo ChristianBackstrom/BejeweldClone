@@ -55,4 +55,19 @@ public class Grid : MonoBehaviour
     {
         return (Vector2)coordinates * gridElementMargin;
     }
+
+    private void OnDrawGizmos()
+    {
+        for (int x = -gridSize.x / 2; x < gridSize.x / 2; x++)
+        {
+            for (int y = -gridSize.y / 2; y < gridSize.y / 2; y++)
+            {
+                Vector2Int coordinates = new Vector2Int(x, y);
+
+                Vector2 position = GeneratePositionFromCoordinates(coordinates);
+                
+                Gizmos.DrawWireCube(position, new Vector3(gridElementMargin, gridElementMargin));
+            }
+        }
+    }
 }
