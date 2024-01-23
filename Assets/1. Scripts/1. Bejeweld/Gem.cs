@@ -52,9 +52,8 @@ public class Gem : GridElement
         
         if (Vector2Int.Distance(Mover.SelectedItem.coordinate, this.coordinate) > 1) return;
         
-        Mover.MoveItemTo(this);
-        
         Mover.SelectedItem.GetComponent<SpriteRenderer>().color = color;
+        Mover.MoveItemTo(this);
     }
 }
 public enum GemType
