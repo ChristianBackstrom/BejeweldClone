@@ -33,29 +33,28 @@ public class Gem : GridElement
     {
         Color color = spriteRenderer.color;
 
-        Gem selectedGem = BejeweldGameManager.Instance.selectedGem;
-        if (selectedGem == null)
+        
+        if (Mover.SelectedItem == null)
         {
-            BejeweldGameManager.Instance.selectedGem = this;
+            Mover.SelectedItem = this;
             color.a /= 2;
             spriteRenderer.color = color;
             return;
         }
 
-        if (selectedGem == this)
+        if (Mover.SelectedItem == this)
         {
-            BejeweldGameManager.Instance.selectedGem = null;
+            Mover.SelectedItem = null;
             color.a *= 2;
             spriteRenderer.color = color;
             return;
         }
         
-        if (Vector2Int.Distance(selectedGem.coordinate, this.coordinate) > 1) return;
-
-
-        BejeweldGameManager.Instance.selectedGem.GetComponent<SpriteRenderer>().color = color;
-        BejeweldGameManager.Instance.MoveGems(this, BejeweldGameManager.Instance.selectedGem);
-        BejeweldGameManager.Instance.selectedGem = null;
+        if (Vector2Int.Distance(Mover.SelectedItem.coordinate, this.coordinate) > 1) return;
+        
+        Mover.MoveItemTo(this);
+        
+        Mover.SelectedItem.GetComponent<SpriteRenderer>().color = color;
     }
 }
 public enum GemType

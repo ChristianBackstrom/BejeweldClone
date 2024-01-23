@@ -10,16 +10,14 @@ public class BejeweldGameManager : MonoBehaviour
 {
     public static BejeweldGameManager Instance;
     
-    public delegate void GemMoved(GridElement sender);
+    public delegate void GemMoved(Gem sender);
 
     private Grid grid;
     
     public GemMoved GemMovedEvent;
 
     [SerializeField] private bool showPopulating = true;
-
-    public Gem selectedGem;
-
+    
     private Dictionary<Vector2Int, Gem> GridElements => ParseToGem();
     
     private void Awake()
@@ -60,9 +58,9 @@ public class BejeweldGameManager : MonoBehaviour
         }
     }
 
-    private void CheckConnectionsWith(GridElement sender)
+    private void CheckConnectionsWith(Gem sender)
     {
-                
+        
     }
 
     private Dictionary<Vector2Int, Gem> ParseToGem()
