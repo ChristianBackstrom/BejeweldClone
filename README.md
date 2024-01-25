@@ -1,4 +1,5 @@
-# Fall Damage - Work Test
+# Work Test
+This project was made for an assignment in Futuregames game programmer course.
 
 ## My Adaptations
 For this project I was suppose to make a bejeweld clone with technology and UX/presentation in mind. So first of all decided that I needed to make the game very understandable and easy to use. I did this by using myself of animations and highlights a lot. I went with an event based input system where i decouple the inputs from the system. 
