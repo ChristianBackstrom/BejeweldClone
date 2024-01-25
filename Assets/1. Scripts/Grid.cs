@@ -7,8 +7,8 @@ using UnityEngine.Serialization;
 
 public class Grid : MonoBehaviour
 {
-    [SerializeField] private GridElement gridElementPrefab;
-    [SerializeField] private Vector2Int gridSize = new Vector2Int(10, 10);
+    [SerializeField] public GridElement gridElementPrefab;
+    [SerializeField] public Vector2Int gridSize = new Vector2Int(10, 10);
     [SerializeField] private float gridElementMargin = 5;
     
     public Dictionary<Vector2Int, GridElement> gridElements;
@@ -78,7 +78,7 @@ public class Grid : MonoBehaviour
         {
             Gem gem = (Gem)gridElement.Value;
             Gizmos.color = gem.isMatched ? Color.red : Color.white;
-            Gizmos.DrawSphere(gem.transform.position, .2f);
+            // Gizmos.DrawSphere(gem.transform.position, .2f);
             Handles.Label(gem.transform.position + new Vector3(-.5f, .5f), gridElement.Key.ToString());
         }
     }

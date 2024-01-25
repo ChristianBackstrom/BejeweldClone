@@ -12,10 +12,14 @@ public static class Mover
     /// <param name="gem">Gem to be swaped with</param>
     public static void MoveItemTo(Gem gem)
     {
-        BejeweldGameManager.Instance.MoveGems(SelectedItem, gem);
-        BejeweldGameManager.Instance.GemMovedEvent?.Invoke(SelectedItem);
-        BejeweldGameManager.Instance.GemMovedEvent?.Invoke(gem);
+        if (BejeweldGameManager.Instance.TryMoveGems(SelectedItem, gem))
+        {
+            BejeweldGameManager.Instance.GemMovedEvent?.Invoke(SelectedItem);
+            BejeweldGameManager.Instance.GemMovedEvent?.Invoke(gem);
+        }
         
         SelectedItem = null;
+        
+        
     }
 }
